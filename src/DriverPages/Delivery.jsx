@@ -45,7 +45,7 @@ const DeliveryProcess=()=>{
         {setUnloaded({style:pressed,disabledState:false,tick3Visibility:'visible'});}
     };
     return(<div>
-        <div className=" pl-2 py-2 rounded-md text-lg  bg-gray-100 shadow-lg">
+        <div className=" pl-2 pt-2 rounded-md text-lg  bg-gray-100 shadow-lg pb-4">
             <div className="text-2xl mb-2 border-2 border-b-black border-gray-100 w-56 font-semibold">
                 Statusul comenzii
             </div>
