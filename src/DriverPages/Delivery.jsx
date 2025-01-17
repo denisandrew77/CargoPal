@@ -58,41 +58,10 @@ const DeliveryProcess=()=>{
                     <button disabled={unloaded.disabledState} onClick={()=>handleDeliveryClick()} className={unloaded.style}>Descărcat</button>
                     <i className={`bi bi-check-circle-fill text-green-600 text-xl ml-2 flex items-center ${unloaded.tick3Visibility}`}></i>
                 </div>
-                <div className="space-y-2">
-                    <div className="flex justify-start">
-                      <input id="file-upload" type="file" className="hidden"/>
-                      <label className="ring-2 ring-black focus:ring-2 focus:ring-blue-500 focus:outline-none py-2 rounded-md bg-zinc-100 placeholder-stone-500 text-center w-64">
-                          <i className="bi bi-upload pr-2"></i>Poza CMR
-                      </label>
-                     </div> 
-                     <div className="flex justify-start">
-                      <input id="file-upload" type="file" className="hidden"/>
-                      <label className="ring-2 ring-black focus:ring-2 focus:ring-blue-500 focus:outline-none py-2 rounded-md bg-zinc-100 placeholder-stone-500 text-center w-64">
-                        <i className="bi bi-upload pr-2"></i>Poza marfa
-                      </label>
-                     </div> 
-                </div>
-                <div>
-                    Discuții cu dispeceratul
-                </div>
-                <div className="flex flex-row space-x-2 items-center">
-                    <div>
-                        <input type="text" className="focus:outline-none border-2 border-black rounded-md p-1 pl-2"/>
-                    </div>
-                    <div>
-                        <button className="px-5 py-1 bg-gray-300 rounded-md active:bg-gray-400 bg-gray-500 text-white font-semibold">Trimite <i className="bi bi-send-fill"></i></button>
-                    </div>
-                </div>
-                <div>
-                    Mesaj Dispecer
-                </div>
-                <div className="w-56 px-3 py-2 rounded-md bg-green-500 bg-gradient-to-r from-green-600 to-green-500 font-bold text-white">
-                    Puteti porni
-                </div>
             </div>
         </div>
-        <div className="flex flex-row justify-end">
-                <button onClick={handleRedirect} className="text-white font-bold px-3 py-2 bg-orange-500 rounded-md active:bg-orange-600">Urmatorul pas <i className="bi bi-chevron-right"></i></button>
+        <div className="relative min-h-screen">
+                <button onClick={handleRedirect} className="fixed bottom-4 right-4 text-white font-bold px-3 py-2 bg-orange-500 rounded-md active:bg-orange-600">Urmatorul pas <i className="bi bi-chevron-right"></i></button>
         </div>
     </div>);
 }
