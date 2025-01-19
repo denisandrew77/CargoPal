@@ -7,7 +7,7 @@ import orderData from "../DataFetching/GetData";
 
 const SignInForm = ()=>{
     const navigate = useNavigate();
-    const [errorState,setErrorState] =useState({error:false,style:'hidden'});
+    const [errorState,setErrorState] =useState('placeholder-stone-500 focus:outline-none');
     const [driverSignInData,setDriverSignInData] = useState({plateNumber:'', orderNumber:''});
     const [data,setData] = useState([]);
     const authentication=data.find(curentOrder=>curentOrder.Plate===driverSignInData.plateNumber&&curentOrder.Order_number===driverSignInData.orderNumber);
@@ -25,13 +25,13 @@ const SignInForm = ()=>{
             navigate('/Loading', {state:authentication});
         }
         else{
-            setErrorState({error:true,style:'visible'});
+            setErrorState('outline outline-red-500 outline-2 ');
         }
     }
     return(
         <form onSubmit={handleSubmit}>
             <input 
-            className=" focus:outline-none focus:bg-zinc-200 p-4 rounded-lg bg-zinc-100 placeholder-stone-500 md:w-80 lg:w-96" 
+            className={`${errorState} focus:bg-zinc-200 p-4 rounded-lg bg-zinc-100  md:w-80 lg:w-96`}
             type="text"
             placeholder="Număr de înmatriculare"
             name="plateNumber"
@@ -42,7 +42,7 @@ const SignInForm = ()=>{
               Introdu numărul de înmatriculare a masinii
             </div>
             <input 
-            className=" focus:outline-none focus:bg-zinc-200 p-4 rounded-lg bg-zinc-100 placeholder-stone-500 md:w-80 lg:w-96" 
+            className={`${errorState} focus:bg-zinc-200 p-4 rounded-lg bg-zinc-100  md:w-80 lg:w-96`}
             type="text" 
             placeholder="Numărul comenzii"
             name="orderNumber"

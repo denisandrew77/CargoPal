@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { data, useLocation, useNavigate } from "react-router-dom";
 import Header from "./InformationForDriver/Header";
 import { createContext } from "react";
 import Address from "./InformationForDriver/Address";
@@ -8,6 +8,8 @@ import Contact from "./InformationForDriver/Contact";
 import DateAndTime from "./InformationForDriver/DateAndTime";
 import Refference from "./InformationForDriver/Refference";
 import Load from "./InformationForDriver/Load";
+import PostData from "../DataFetching/PostData";
+import orderData from "../DataFetching/GetData";
 
 export const OrderDataContext = createContext();
 const LoadingDetails = ()=>{
@@ -27,10 +29,11 @@ const LoadingDetails = ()=>{
     );
 }
 const LoadingProcess=()=>{
+    const [nextPageDisabledState,setNextPageDisabledState] = useState(true);
     const dataAndStatus = useContext(OrderDataContext);
     const navigate=useNavigate();
     const handleRedirectClick = ()=>{
-        navigate("/Delivery",{state:dataAndStatus.orderData});
+       navigate("/Delivery",{state:dataAndStatus.orderData});
     }
     //State values
     const initial='peer border-2 border-black rounded-md px-4 py-2 bg-zinc-100 w-64';
@@ -39,8 +42,11 @@ const LoadingProcess=()=>{
     const [leftForLoading,setLeftForLoading] = useState({style:initial,disabledState:false,tick1Visibility:'hidden'});
     const handleLeftForLoadingClick = ()=>{
         if(leftForLoading.style===initial)
-        {setLeftForLoading({style:pressed,disabledState:false,tick1Visibility:'visible'});
-            setArrivedAtLoading({style:initial,disabledState:false,tick2Visibility:'hidden'});}
+        {   setLeftForLoading({style:pressed,disabledState:false,tick1Visibility:'visible'});
+            setArrivedAtLoading({style:initial,disabledState:false,tick2Visibility:'hidden'});
+            const updatedData={...dataAndStatus.orderData, Status:"Left for Loading"};
+            PostData(updatedData);
+        }
     };
     //Arrived at Loading button state
     const [arrivedAtLoading,setArrivedAtLoading] = useState({style:initial,disabledState:true,tick2Visibility:'hidden'});
@@ -48,13 +54,17 @@ const LoadingProcess=()=>{
         if(arrivedAtLoading.style===initial)
         {setArrivedAtLoading({style:pressed,disabledState:true,tick2Visibility:'visible'});
         setLoaded({style:initial,disabledState:false,tick3Visibility:'hidden'});}
-        
+        const updatedData={...dataAndStatus.orderData, Status:"Arrived at Loading"};
+        PostData(updatedData);
     };
     //Loaded button  state
     const [loaded,setLoaded] = useState({style:initial,disabledState:true,tick3Visibility:'hidden'});
     const handleLoadedClick = ()=>{
         if(loaded.style===initial)
-        {setLoaded({style:pressed,disabledState:false,tick3Visibility:'visible'});}
+        {setLoaded({style:pressed,disabledState:false,tick3Visibility:'visible'});
+        setNextPageDisabledState(false);}
+        const updatedData={...dataAndStatus.orderData, Status:"Loaded"};
+        PostData(updatedData);
     };
     return(
     <div>
@@ -79,7 +89,7 @@ const LoadingProcess=()=>{
             </div>
         </div>
         <div className="relative min-h-screen">
-                <button onClick={handleRedirectClick} className="fixed bottom-4 right-4 text-white font-bold px-3 py-2 bg-orange-500 rounded-md active:bg-orange-600">Urmatorul pas <i className="bi bi-chevron-right"></i></button>
+                <button disabled={nextPageDisabledState} onClick={handleRedirectClick} className="fixed bottom-4 right-4 text-white font-bold px-3 py-2 bg-orange-500 rounded-md active:bg-orange-600">Urmatorul pas <i className="bi bi-chevron-right"></i></button>
         </div>
     </div>);
 }
@@ -88,6 +98,7 @@ const Loading = ()=>{
     const location = useLocation();
     const orderData = location.state;
     const status = 'loading';
+    console.log(orderData);
     const values={orderData,status};
     return(
     <OrderDataContext.Provider value={values}>
@@ -96,7 +107,7 @@ const Loading = ()=>{
                 Încărcare
             </div>
             <div className="m-2 space-y-2">
-                <LoadingDetails/>
+                <LoadingDetails details={orderData}/>
                 <LoadingProcess/>
             </div>
         </div>

@@ -7,6 +7,8 @@ import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { OrderDataContext } from "./Loading";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import PostData from "../DataFetching/PostData";
 
 const DeliveryDetails = ()=>{
     return (
@@ -23,7 +25,9 @@ const DeliveryDetails = ()=>{
     );
 }
 const DeliveryProcess=()=>{
+    const [nextPageDisabledState,setNextPageDisabledState] = useState(true);
     const navigate = useNavigate();
+    const dataAndStatus = useContext(OrderDataContext);
     const handleRedirect = () =>{
         navigate('/OrderDone');
     }
@@ -35,14 +39,20 @@ const DeliveryProcess=()=>{
     const handleArrivedAtDeliveryClick = ()=>{
         if(arrivedAtDelivery.style===initial)
         {setArrivedAtDelivery({style:pressed,disabledState:false,tick2Visibility:'visible'});
-        setUnloaded({style:initial,disabledState:false,tick3Visibility:'hidden'});}
+        setUnloaded({style:initial,disabledState:false,tick3Visibility:'hidden'});
+        const updatedData={...dataAndStatus.orderData, Status:"Arrived at unloading"};
+            PostData(updatedData);
+    }
         
     };
     //Loaded button  state
     const [unloaded,setUnloaded] = useState({style:initial,disabledState:true,tick3Visibility:'hidden'});
     const handleDeliveryClick = ()=>{
         if(unloaded.style===initial)
-        {setUnloaded({style:pressed,disabledState:false,tick3Visibility:'visible'});}
+        {setUnloaded({style:pressed,disabledState:false,tick3Visibility:'visible'});
+        setNextPageDisabledState(false);
+        const updatedData={...dataAndStatus.orderData, Status:"Unloaded"};
+        PostData(updatedData);}
     };
     return(<div>
         <div className=" pl-2 pt-2 rounded-md text-lg  bg-gray-100 shadow-lg pb-4">
@@ -61,7 +71,7 @@ const DeliveryProcess=()=>{
             </div>
         </div>
         <div className="relative min-h-screen">
-                <button onClick={handleRedirect} className="fixed bottom-4 right-4 text-white font-bold px-3 py-2 bg-orange-500 rounded-md active:bg-orange-600">Urmatorul pas <i className="bi bi-chevron-right"></i></button>
+                <button disabled={nextPageDisabledState} onClick={handleRedirect} className="fixed bottom-4 right-4 text-white font-bold px-3 py-2 bg-orange-500 rounded-md active:bg-orange-600">Urmatorul pas <i className="bi bi-chevron-right"></i></button>
         </div>
     </div>);
 }

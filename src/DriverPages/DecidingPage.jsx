@@ -34,7 +34,6 @@ const DecidingPage =  () =>{
           CargoPal
         </div>
         <div className="flex flex-col justify-center ">
-            <div className="text-left mb-2">Sunt:</div>
                 <button onClick={handleDriverButtonClick} className="text-white font-semibold px-12 py-3 rounded-lg bg-orange-500 hover:bg-orange-600 active:bg-orange-600 text-xl mb-5">Sofer</button>
               <button onClick={handleCompanyButtonClick} className="text-white font-semibold px-7 py-3 rounded-lg bg-orange-500 hover:bg-orange-600 active:bg-orange-600 text-xl">Companie</button>
         </div>
