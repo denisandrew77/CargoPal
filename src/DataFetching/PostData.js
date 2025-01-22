@@ -6,5 +6,6 @@ const PostData = async (orderData) =>{
         },
     });
     console.log(response.data);
+    return response.data;
 }
 export default PostData;

@@ -7,7 +7,7 @@ const DateAndTime = () => {
     return(
         <div className="flex flex-row">
                     <i className="bi bi-clock-fill mr-1"></i>
-                    <div>Data si ora</div>
+                    <div>Data si ora:</div>
                     <div className="ml-2 w-48 flex space-x-2">
                     <span>
                         {dataAndState.status === 'loading'

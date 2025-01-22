@@ -5,7 +5,9 @@ import DriversignIn from "./DriverPages/DriverSignIn";
 import Loading from "./DriverPages/Loading";
 import Delivery from "./DriverPages/Delivery";
 import OrderDone from "./DriverPages/OrderDone";
-
+import CompanyCreateAccount from "./CompanyPages/CompanyCreateAccount";
+import CreateCar from "./CompanyPages/CreateCar";
+import CompanyMainMenu from "./CompanyPages/CompanyMainMenu";
 const App1 = ()=>{
     return (
     <BrowserRouter>
@@ -15,6 +17,9 @@ const App1 = ()=>{
             <Route path="/Loading" element={<Loading/>}/>
             <Route path="/Delivery" element={<Delivery/>}/>
             <Route path="/OrderDone" element={<OrderDone/>}/>
+            <Route path="/CompanyCreateAccount" element={<CompanyCreateAccount/>} />
+            <Route path="/CompanyMainMenu" element={<CompanyMainMenu/>}/>
+            <Route path="/CreateCar" element={<CreateCar/>}/>
         </Routes>
     </BrowserRouter>
     )

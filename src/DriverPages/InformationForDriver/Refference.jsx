@@ -10,7 +10,7 @@ const Refference = () =>{
                     <i className="bi bi-upc-scan mr-1"></i>
                     <div>Referinta:</div>
                     <div className="ml-2 w-48">
-                        {dataAndState.orderData.Loading_refference}
+                        {dataAndState.state==="loading"?dataAndState.orderData.Loading_refference:dataAndState.orderData.Delivery_refference}
                     </div>
                 </div>
     );

@@ -10,7 +10,7 @@ const DecidingPage =  () =>{
     navigate("/DriverSignIn");
   };
   const handleCompanyButtonClick = ()=>{
-    navigate("/CompanyCreateAccount")
+    navigate("/CompanyCreateAccount");
   }
   const [visibility,setVisibility] = useState('hidden'); 
 
